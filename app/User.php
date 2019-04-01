@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pages(){
+        return $this->hasMany('App\Page');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function hasAnyRole($roles){
+        return $this->roles()->whereIn('name', $roles)->first();
+    }
+
+    public function hasRole($role){
+        return $this->roles()->where('name', $roles)->first();
+    }
 }
