@@ -22,3 +22,5 @@ Route::get('/admin', function(){
 })->middleware('admin');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('admin/pages', 'Admin\PagesController');
