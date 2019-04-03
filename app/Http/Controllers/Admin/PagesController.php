@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidatePage;
+
+use Auth;
+use App\Page;
 
 class PagesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,11 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = Page::all();
+        if(Auth::user()->isAdmin()){
+            $pages = Page::all();
+        } else{
+            $pages = Auth::user()->pages()->get();
+        }
 
         return view('admin.pages.index', ['pages' => $pages]);
     }
@@ -36,9 +47,15 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidatePage $request)
     {
-        //
+        Auth::user()->pages()->save(new Page($request->only([
+            'title', 
+            'url', 
+            'content'
+        ])));
+
+        return redirect()->route('pages.index');
     }
 
     /**
@@ -60,6 +77,10 @@ class PagesController extends Controller
      */
     public function edit(Page $page)
     {
+        if(Auth::user()->cant('update', $page)){
+            return redirect()->route('pages.index');
+        }
+
         return view('admin.pages.edit', ['model' => $page]);
     }
 
@@ -70,9 +91,17 @@ class PagesController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    public function update(ValidatePage $request, Page $page)
     {
-        //
+        if(Auth::user()->cant('update', $page)){
+            return redirect()->route('pages.index');
+        }
+
+        $page->fill($request->only(['title', 'url', 'content']));
+        
+        $page->save();
+
+        return redirect()->route('pages.index');
     }
 
     /**
@@ -83,6 +112,8 @@ class PagesController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        if(Auth::user()->cant('delete', $page)){
+            return redirect()->route('pages.index');
+        }
     }
 }

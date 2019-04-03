@@ -50,6 +50,10 @@ class User extends Authenticatable
     }
 
     public function hasRole($role){
-        return $this->roles()->where('name', $roles)->first();
+        return $this->roles()->where('name', $role)->first();
+    }
+
+    public function isAdmin(){
+        return $this->hasRole('admin');
     }
 }

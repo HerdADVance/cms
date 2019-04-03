@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('url')->unique();
-            $table->mediumText('content');
+            $table->mediumText('content')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });
