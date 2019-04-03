@@ -3,5 +3,5 @@
 <a href="{{ route('pages.create') }}">Create New Page</a>
 
 @foreach($pages as $page)
-	<p><a href="{{$page->url}}">{{$page->title}}</a></p>
+	<p><a href="{{ route ('pages.edit', ['page' => $page->id]) }}">{{$page->title}}</a></p>
 @endforeach
