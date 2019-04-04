@@ -9,3 +9,5 @@
 </form>
 
 @endsection
+
+@include('admin.blog.partials.scripts')

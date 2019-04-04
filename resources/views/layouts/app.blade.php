@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Bulldog CMS</title>
+    <link rel="icon" type="image/png" href="/bulldog-favicon.png">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -17,18 +18,20 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    <link href="/css/normalize.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <header class="header">
-            <div class="row">
-                <div class="col-6">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Bulldog CMS
-                    </a>
-                </div>
-                <div class="col-6">
+    <header class="header wrap-bg">
+        <div class="row">
+            <div class="col-6">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    Bulldog CMS
+                </a>
+            </div>
+            <div class="col-6">
+                <nav class="nav nav-inline">
                     <ul>
                     @guest
                         <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>  
@@ -47,20 +50,23 @@
                         </a></li>
                     @endguest
                     </ul>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+                </nav>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main class="main">
+    <main class="main">
+        <section class="wrap">
             @yield('content')
-        </main>
+        </section>
+    </main>
 
-        <footer>
-            <p>Footer</p>
-        </footer>  
-    </div>
+    <footer class="wrap-bg">
+        <p>Footer</p>
+    </footer>  
+
 </body>
 </html>

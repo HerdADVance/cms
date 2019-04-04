@@ -20,7 +20,7 @@
 	<input type="text" class="form-control" id="slug" name="slug" value="{{$model->slug}}" />
 </div>
 
-<div class="form-group">
+<div class="form-group" style="position:relative;">
 	<label for="published_at">Published At</label>
 	<input type="text" class="form-control" id="published_at" name="published_at" value="{{$model->published_at}}" />
 </div>

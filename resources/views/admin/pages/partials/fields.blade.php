@@ -20,6 +20,28 @@
 	<input type="text" class="form-control" id="url" name="url" value="{{$model->url}}" />
 </div>
 
+<div class="form-group row">
+	<div class="col-3">
+		<label>Order</label>
+	</div>
+	<div classs="col-3">
+		<select name="order" id="order" class="form-control">
+			<option value=""></option>
+			<option value="before">Before</option>
+			<option value="after">After</option>
+			<option value="child">Child Of</option>
+		</select>
+	</div>
+	<div class="col-6">
+		<select name="orderPage" id="orderPage" class="form-control">
+			<option value=""></option>
+			@foreach($orderPages as $page)
+				<option value="{{$page->id}}">{{$page->title}}
+			@endforeach
+		</select>
+	</div>
+</div>
+
 <div class="form-group">
 	<label for="content">Content</label>
 	<textarea class="form-control" id="content" name="content">{{$model->content}}</textarea>
