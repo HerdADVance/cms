@@ -34,6 +34,7 @@
                         <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>  
                     @else
                         <li><a href="{{ route('pages.index') }}">Pages</a></li>
+                        <li><a href="{{ route('blog.index') }}">Posts</a></li>
 
                         @can('manageUsers', App\User::class)
                             <li><a href="{{ route('users.index') }}">Users</a></li>

@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if(session('status'))
+	<div class="alert alert-info">
+		{{session('status')}}
+	</div>
+@endif
+
 <h1>Users</h1>
 
 <table>
@@ -18,5 +24,9 @@
 			<td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
 		</tr>
 	@endforeach
+
+</table>
+
+{{$model->links()}}
 
 @endsection

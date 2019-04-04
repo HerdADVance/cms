@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('admin');
+        $this->middleware('can:manageUsers, App\User');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('model', User::all());
+        return view('admin.users.index')->with('model', User::Paginate(20));
     }
 
 
@@ -31,7 +37,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         if(Auth::user()->id == $user->id){
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('status', 'Cannot edit yourself.');
         }
         
         return view('admin.users.edit', [
@@ -50,12 +56,12 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         if(Auth::user()->id == $user->id){
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->with('status', 'Cannot edit yourself.');
         }
 
         $user->roles()->sync($request->roles);
         
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('status', "$user->name was updated.");
     }
 
     /**

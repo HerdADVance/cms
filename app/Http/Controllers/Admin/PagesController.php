@@ -55,7 +55,7 @@ class PagesController extends Controller
             'content'
         ])));
 
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'The page has been created.');
     }
 
     /**
@@ -98,10 +98,9 @@ class PagesController extends Controller
         }
 
         $page->fill($request->only(['title', 'url', 'content']));
-        
         $page->save();
 
-        return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'The page was updated.');
     }
 
     /**
