@@ -23,7 +23,7 @@ class PagesController extends Controller
     public function index()
     {
         if(Auth::user()->isAdmin()){
-            $pages = Page::defaultOrder()->get();
+            $pages = Page::defaultOrder()->withDepth()->get();
         } else{
             $pages = Auth::user()->pages()->get();
         }
@@ -40,7 +40,7 @@ class PagesController extends Controller
     {
         return view('admin.pages.create')->with([
             'model' => new Page(),
-            'orderPages' => Page::defaultOrder()->get()
+            'orderPages' => Page::defaultOrder()->withDepth()->get()
         ]);
     }
 
@@ -91,7 +91,7 @@ class PagesController extends Controller
 
         return view('admin.pages.edit', [
             'model' => $page,
-            'orderPages' => Page::defaultOrder()->get()
+            'orderPages' => Page::defaultOrder()->withDepth()->get()
         ]);
     }
 

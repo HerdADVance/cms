@@ -36,7 +36,7 @@
 		<select name="orderPage" id="orderPage" class="form-control">
 			<option value=""></option>
 			@foreach($orderPages as $page)
-				<option value="{{$page->id}}">{{$page->title}}
+				<option value="{{$page->id}}">{{ $page->present()->paddedTitle }}
 			@endforeach
 		</select>
 	</div>
