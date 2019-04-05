@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Bulldog CMS</title>
+    <title>Site Name</title>
     <link rel="icon" type="image/png" href="/bulldog-favicon.png">
 
     <!-- Scripts -->
@@ -26,8 +26,8 @@
     <header class="header wrap-bg">
         <div class="row">
             <div class="col-6">
-                <a class="navbar-brand" href="{{ url('/admin') }}">
-                    Bulldog CMS
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    Site Name
                 </a>
             </div>
             <div class="col-6">

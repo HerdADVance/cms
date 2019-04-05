@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -21,7 +21,7 @@ Route::get('/admin', function(){
 	return view('admin.index');
 })->middleware('admin');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Frontend\HomeController@index')->name('home');
 
 Route::resource('admin/pages', 'Admin\PagesController', ['except' => ['show']]);
 Route::resource('admin/blog', 'Admin\BlogController', ['except' => ['show']]);
