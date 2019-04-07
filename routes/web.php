@@ -22,6 +22,8 @@ Route::get('/admin', function(){
 })->middleware('admin');
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+Route::get('/blog', 'Frontend\BlogpostController@index')->name('blog');
+Route::get('/blog/{slug}', 'Frontend\BlogpostController@view')->name('blog.view');
 
 Route::resource('admin/pages', 'Admin\PagesController', ['except' => ['show']]);
 Route::resource('admin/blog', 'Admin\BlogController', ['except' => ['show']]);

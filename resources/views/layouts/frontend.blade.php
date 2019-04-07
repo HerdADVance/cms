@@ -33,22 +33,8 @@
             <div class="col-6">
                 <nav class="nav nav-inline">
                     <ul>
-                    @guest
-                        <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>  
-                    @else
-                        <li><a href="{{ route('pages.index') }}">Pages</a></li>
-                        <li><a href="{{ route('blog.index') }}">Posts</a></li>
-
-                        @can('manageUsers', App\User::class)
-                            <li><a href="{{ route('users.index') }}">Users</a></li>
-                        @endcan
-
-                        <li><a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a></li>
-                    @endguest
+                        @include('partials.nav')
+                        <li><a href="{{ route('blog') }}">Blog</a></li>
                     </ul>
                 </nav>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
